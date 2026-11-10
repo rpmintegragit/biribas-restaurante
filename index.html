@@ -4,279 +4,549 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Biriba's Restaurante · Campo do Tenente</title>
-<meta name="description" content="Almoço com carne assada na roda de fogo, em Campo do Tenente-PR. Nota 4,7 no Google com 213 avaliações. Av. Miguel Komarchewski, 2350.">
+<meta name="description" content="Almoço com carne na roda de fogo em Campo do Tenente-PR. Nota 4,7 no Google com 213 avaliações. Reserve, encomende e trace a rota.">
 <meta property="og:title" content="Biriba's Restaurante · Campo do Tenente">
-<meta property="og:description" content="Almoço com carne na roda de fogo. Nota 4,7 no Google. Peça ou reserve pelo WhatsApp.">
-<meta property="og:image" content="img/fachada.jpg">
+<meta property="og:description" content="Almoço com carne na roda de fogo. Reserve e encomende pelo WhatsApp.">
+<meta property="og:image" content="https://rpmintegragit.github.io/biribas-restaurante/img/fachada.jpg">
+<meta name="theme-color" content="#9b1336">
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --carmim:#9b1336; --carmim-escuro:#6f0c26; --pessego:#ecc9ab; --pessego-claro:#f7e6d6;
-  --carvao:#2b2522; --brasa:#f2913a; --branco:#ffffff; --tinta:#2b2522; --suave:#6b5d55;
-  --largura:1180px;
+  --carmim:#9b1336; --carmim-hover:#7f0f2c; --rosa:#fbeef1; --pessego:#fbefe5; --brasa:#e9862f;
+  --fundo:#f8f7f5; --cartao:#ffffff; --linha:#ece7e2; --tinta:#2e2724; --suave:#6f645d; --verde:#1f9d55;
+  --raio:14px; --largura:1180px;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;font-family:"Figtree",system-ui,sans-serif;color:var(--tinta);background:var(--pessego-claro);font-size:17px;line-height:1.55}
+body{margin:0;font-family:"Figtree",system-ui,sans-serif;color:var(--tinta);background:var(--fundo);font-size:17px;line-height:1.55}
 img{max-width:100%;display:block}
 a{color:inherit}
-:focus-visible{outline:3px solid var(--brasa);outline-offset:3px;border-radius:4px}
-.wrap{max-width:var(--largura);margin:0 auto;padding:0 24px}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--brasa);outline-offset:2px;border-radius:6px}
+.wrap{max-width:var(--largura);margin:0 auto;padding:0 22px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 
-/* faixa de demonstração */
-.demo{background:var(--carvao);color:#f3e7dc;font-size:13.5px;text-align:center;padding:8px 16px}
-.demo strong{color:var(--brasa)}
+/* aviso de demonstração */
+.demo{background:#f1ece8;color:#5d524c;font-size:13.5px;text-align:center;padding:7px 14px}
+.demo b{color:var(--carmim)}
 
-/* topo: o letreiro */
-.letreiro{background:var(--carmim);color:var(--branco);position:sticky;top:0;z-index:20;box-shadow:0 2px 0 var(--carmim-escuro)}
-.letreiro .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:66px}
-.marca{font-family:"Libre Caslon Display",serif;font-size:30px;text-decoration:none;white-space:nowrap;letter-spacing:.2px}
-.marca small{font-family:"Libre Caslon Text",serif;font-style:italic;font-size:17px;margin-left:10px;opacity:.95}
-.marca small::before,.marca small::after{content:"";display:inline-block;width:18px;height:1.5px;background:currentColor;vertical-align:middle;margin:0 6px}
-.letreiro nav{display:flex;gap:22px;font-weight:500;font-size:15px}
-.letreiro nav a{text-decoration:none;opacity:.92}
-.letreiro nav a:hover{opacity:1;text-decoration:underline;text-underline-offset:4px}
-@media (max-width:820px){.letreiro nav{display:none}.marca{font-size:25px}.marca small{font-size:15px}}
+/* cabeçalho claro */
+header.topo{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.94);backdrop-filter:saturate(1.4) blur(8px);border-bottom:1px solid var(--linha)}
+header.topo .wrap{display:flex;align-items:center;gap:18px;min-height:64px}
+.marca{font-family:"Libre Caslon Display",serif;font-size:27px;color:var(--carmim);text-decoration:none;white-space:nowrap}
+.marca small{font-family:"Libre Caslon Text",serif;font-style:italic;font-size:15px;color:var(--suave);margin-left:8px}
+.nav{display:flex;gap:4px;margin-left:auto}
+.nav a{text-decoration:none;font-size:15px;font-weight:500;padding:8px 12px;border-radius:999px;color:#4a403a}
+.nav a.ativo,.nav a:hover{background:var(--rosa);color:var(--carmim)}
+.pedido-btn{display:inline-flex;align-items:center;gap:8px;background:var(--carmim);color:#fff;border:0;border-radius:999px;padding:9px 16px;font-weight:600;cursor:pointer}
+.pedido-btn .qt{background:#fff;color:var(--carmim);border-radius:999px;min-width:22px;height:22px;display:inline-grid;place-items:center;font-size:13px;padding:0 6px}
+@media (max-width:900px){.nav{display:none}.pedido-btn{margin-left:auto}}
+
+/* botões */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:600;text-decoration:none;border-radius:10px;padding:13px 20px;border:0;cursor:pointer;font-size:16px;transition:background .15s,transform .1s}
+.btn:active{transform:translateY(1px)}
+.btn-p{background:var(--carmim);color:#fff}.btn-p:hover{background:var(--carmim-hover)}
+.btn-s{background:#fff;color:var(--tinta);box-shadow:inset 0 0 0 1.5px #cfc6bf}.btn-s:hover{box-shadow:inset 0 0 0 1.5px var(--tinta)}
+.btn-z{background:var(--verde);color:#fff}.btn-z:hover{background:#178245}
 
 /* abertura */
-.abertura{display:grid;grid-template-columns:1.05fr .95fr;min-height:calc(100vh - 100px);background:var(--pessego)}
-.abertura .texto{padding:clamp(40px,7vw,96px) clamp(24px,5vw,72px);display:flex;flex-direction:column;justify-content:center;gap:26px}
-.status{display:inline-flex;align-items:center;gap:10px;align-self:flex-start;background:var(--branco);border-radius:999px;padding:8px 16px 8px 12px;font-weight:600;font-size:15px;box-shadow:0 1px 0 rgba(43,37,34,.12)}
-.status i{width:11px;height:11px;border-radius:50%;background:#9a9a9a;display:inline-block}
-.status.aberto i{background:#1f9d55;box-shadow:0 0 0 4px rgba(31,157,85,.18)}
-h1{font-family:"Libre Caslon Display",serif;font-weight:400;font-size:clamp(46px,6.4vw,86px);line-height:1.02;margin:0;color:var(--carvao)}
-.abertura p.lead{font-size:clamp(18px,1.6vw,21px);max-width:34ch;margin:0;color:#43372f}
-.acoes{display:flex;flex-wrap:wrap;gap:12px}
-.btn{display:inline-flex;align-items:center;gap:10px;font-weight:600;text-decoration:none;border-radius:10px;padding:15px 22px;font-size:16.5px;transition:transform .15s ease,background .15s}
-.btn:active{transform:translateY(1px)}
-.btn-zap{background:var(--carmim);color:var(--branco)}
-.btn-zap:hover{background:var(--carmim-escuro)}
-.btn-mapa{background:transparent;color:var(--carvao);box-shadow:inset 0 0 0 2px var(--carvao)}
-.btn-mapa:hover{background:rgba(43,37,34,.06)}
-.provas{display:flex;flex-wrap:wrap;gap:22px 36px;font-size:15px;color:#4d4038}
-.provas b{display:block;font-family:"Libre Caslon Display",serif;font-weight:400;font-size:34px;color:var(--carmim);line-height:1.1}
-.abertura .foto{position:relative;overflow:hidden;min-height:420px}
-.abertura .foto img{width:100%;height:100%;object-fit:cover;object-position:50% 40%}
-.abertura .foto figcaption{position:absolute;right:12px;bottom:10px;background:rgba(43,37,34,.72);color:#f6eee7;font-size:12px;padding:4px 8px;border-radius:6px}
-@media (max-width:900px){.abertura{grid-template-columns:1fr;min-height:auto}.abertura .foto{min-height:380px;order:-1}}
+.abertura{padding:44px 0 56px}
+.abertura .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+.status{display:inline-flex;align-items:center;gap:9px;background:#fff;border:1px solid var(--linha);border-radius:999px;padding:7px 14px 7px 11px;font-weight:600;font-size:14.5px}
+.status i{width:10px;height:10px;border-radius:50%;background:#a7a09b}
+.status.aberto i{background:var(--verde);box-shadow:0 0 0 4px rgba(31,157,85,.16)}
+h1{font-family:"Libre Caslon Display",serif;font-weight:400;font-size:clamp(44px,5.6vw,76px);line-height:1.03;margin:18px 0 16px;letter-spacing:-.5px}
+.lead{font-size:clamp(18px,1.5vw,20px);color:#4e443e;max-width:40ch;margin:0 0 26px}
+.acoes{display:flex;flex-wrap:wrap;gap:10px}
+.provas{display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:12px 34px;margin-top:30px;color:var(--suave);font-size:14.5px}
+.provas b{display:block;font-family:"Libre Caslon Display",serif;font-weight:400;font-size:32px;color:var(--tinta);line-height:1.1}
+.foto-hero{position:relative;border-radius:22px;overflow:hidden;aspect-ratio:4/5;box-shadow:0 30px 60px -30px rgba(46,39,36,.45)}
+.foto-hero img{width:100%;height:100%;object-fit:cover}
+.foto-hero figcaption{position:absolute;left:12px;bottom:12px;background:rgba(255,255,255,.9);font-size:12px;padding:4px 9px;border-radius:999px;color:#5d524c}
+.selo{position:absolute;right:-14px;top:24px;background:#fff;border-radius:16px;padding:12px 16px;box-shadow:0 14px 30px -12px rgba(46,39,36,.35);font-size:14px}
+.selo strong{display:block;font-size:22px;color:var(--carmim);font-family:"Libre Caslon Display",serif;font-weight:400}
+@media (max-width:900px){.abertura .wrap{grid-template-columns:1fr}.foto-hero{aspect-ratio:4/3}.selo{right:12px}}
+
+/* seções */
+section.bloco{padding:72px 0}
+section.bloco.alt{background:#fff;border-top:1px solid var(--linha);border-bottom:1px solid var(--linha)}
+h2{font-family:"Libre Caslon Display",serif;font-weight:400;font-size:clamp(32px,3.6vw,46px);line-height:1.1;margin:0 0 10px}
+.sub{color:var(--suave);max-width:62ch;margin:0 0 30px}
+
+/* cardápio */
+.cardapio-top{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:18px}
+.busca{flex:1 1 260px;display:flex;align-items:center;gap:8px;background:#fff;border:1.5px solid #ddd5cf;border-radius:12px;padding:0 14px}
+.busca input{border:0;outline:0;padding:12px 0;width:100%;background:transparent}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1.5px solid #ddd5cf;background:#fff;border-radius:999px;padding:8px 14px;cursor:pointer;font-weight:500;font-size:15px}
+.chip[aria-pressed="true"]{background:var(--carmim);border-color:var(--carmim);color:#fff}
+.vista{display:flex;gap:6px}
+.vista button{border:1.5px solid #ddd5cf;background:#fff;border-radius:10px;padding:8px 11px;cursor:pointer}
+.vista button[aria-pressed="true"]{border-color:var(--tinta)}
+.aviso-ilustrativo{font-size:13.5px;color:#8a5a00;background:#fff6e5;border:1px solid #f2dfb5;border-radius:10px;padding:8px 12px;margin:0 0 18px}
+.grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.grade.lista{grid-template-columns:1fr}
+.prato{background:#fff;border:1px solid var(--linha);border-radius:var(--raio);padding:18px;display:flex;flex-direction:column;gap:10px}
+.grade.lista .prato{flex-direction:row;align-items:center}
+.prato .ico{width:46px;height:46px;border-radius:12px;background:var(--pessego);display:grid;place-items:center;font-size:22px;flex:none}
+.prato h3{margin:0;font-size:18px}
+.prato p{margin:0;color:var(--suave);font-size:15px}
+.prato .rodape{display:flex;align-items:center;gap:8px;margin-top:auto}
+.grade.lista .prato .rodape{margin:0 0 0 auto}
+.tag{font-size:12.5px;background:#eef6f0;color:#2f6b45;border-radius:999px;padding:3px 9px}
+.fav{margin-left:auto;border:0;background:transparent;cursor:pointer;font-size:20px;color:#c9bfb8;padding:4px}
+.fav[aria-pressed="true"]{color:var(--carmim)}
+.add{border:1.5px solid var(--carmim);color:var(--carmim);background:#fff;border-radius:10px;padding:7px 12px;font-weight:600;cursor:pointer}
+.add.no{background:var(--carmim);color:#fff}
+.vazio{grid-column:1/-1;text-align:center;color:var(--suave);padding:30px;background:#fff;border-radius:var(--raio);border:1px dashed #d9cfc8}
+
+/* linha do tempo */
+.trilha{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:26px}
+.trilha::before{content:"";position:absolute;left:0;right:0;top:22px;height:3px;background:var(--linha)}
+.trilha .progresso{position:absolute;left:0;top:22px;height:3px;background:var(--carmim);width:0;transition:width .2s linear}
+.passo{position:relative;padding-top:52px}
+.passo .bola{position:absolute;top:8px;left:0;width:31px;height:31px;border-radius:50%;background:#fff;border:3px solid var(--linha);display:grid;place-items:center;font-weight:700;font-size:14px;transition:border-color .3s,background .3s,color .3s}
+.passo.ok .bola{border-color:var(--carmim);background:var(--carmim);color:#fff}
+.passo h3{margin:0 0 6px;font-size:18px}
+.passo p{margin:0;color:var(--suave);font-size:15px}
+@media (max-width:820px){.trilha{grid-template-columns:1fr;gap:6px}.trilha::before,.trilha .progresso{display:none}.passo{padding:0 0 18px 46px}.passo .bola{left:0;top:0}}
 
 /* roda de fogo */
-.roda{background:var(--carvao);color:#f6ece3;padding:clamp(64px,9vw,120px) 0;position:relative;overflow:hidden}
-.roda .wrap{display:grid;grid-template-columns:minmax(260px,420px) 1fr;gap:clamp(32px,6vw,90px);align-items:center}
-.roda h2{font-family:"Libre Caslon Display",serif;font-weight:400;font-size:clamp(36px,4.4vw,58px);line-height:1.08;margin:0 0 18px;color:#fff}
-.roda p{max-width:52ch;color:#e3d4c8;margin:0 0 14px}
-.roda svg{width:100%;height:auto;filter:drop-shadow(0 18px 40px rgba(242,145,58,.25))}
-.giro{transform-origin:200px 200px;animation:gira 26s linear infinite}
+.roda{display:grid;grid-template-columns:minmax(220px,360px) 1fr;gap:48px;align-items:center}
+.roda svg{width:100%;height:auto}
+.giro{transform-origin:200px 200px;animation:gira 30s linear infinite}
 @keyframes gira{to{transform:rotate(360deg)}}
-.chama{animation:chama 2.4s ease-in-out infinite alternate}
-@keyframes chama{from{opacity:.75}to{opacity:1}}
-@media (prefers-reduced-motion:reduce){.giro,.chama{animation:none}}
-@media (max-width:820px){.roda .wrap{grid-template-columns:1fr}.roda svg{max-width:300px;margin:0 auto}}
-
-/* seções claras */
-section.clara{padding:clamp(64px,8vw,110px) 0}
-h2.titulo{font-family:"Libre Caslon Display",serif;font-weight:400;font-size:clamp(34px,4vw,52px);line-height:1.1;margin:0 0 12px;color:var(--carvao)}
-.sub{color:var(--suave);max-width:60ch;margin:0 0 40px}
+@media (prefers-reduced-motion:reduce){.giro{animation:none}html{scroll-behavior:auto}}
+@media (max-width:820px){.roda{grid-template-columns:1fr}.roda svg{max-width:240px}}
 
 /* avaliações */
-.vozes{display:grid;grid-template-columns:1.4fr 1fr;gap:28px}
-.vozes blockquote{margin:0;background:var(--branco);border-radius:14px;padding:30px 32px;position:relative}
-.vozes blockquote.grande{grid-row:span 2;background:var(--carmim);color:#fff;display:flex;flex-direction:column;justify-content:space-between}
-.vozes blockquote.grande p{font-family:"Libre Caslon Text",serif;font-size:clamp(22px,2.3vw,30px);line-height:1.35}
-.vozes p{margin:0 0 18px;font-family:"Libre Caslon Text",serif;font-size:19px;line-height:1.5}
-.vozes cite{font-style:normal;font-weight:600;font-size:14.5px;opacity:.85}
-.estrelas{color:var(--brasa);letter-spacing:2px;font-size:15px;margin-bottom:10px}
-.grande .estrelas{color:#ffd29d}
-@media (max-width:820px){.vozes{grid-template-columns:1fr}.vozes blockquote.grande{grid-row:auto}}
+.carrossel{position:relative}
+.trilho{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px;scrollbar-width:thin}
+.voz{flex:0 0 min(420px,86%);scroll-snap-align:start;background:#fff;border:1px solid var(--linha);border-radius:var(--raio);padding:26px}
+.voz .est{color:var(--brasa);letter-spacing:2px;font-size:15px}
+.voz p{font-family:"Libre Caslon Text",serif;font-size:18.5px;line-height:1.5;margin:10px 0 14px}
+.voz cite{font-style:normal;font-weight:600;font-size:14px;color:var(--suave)}
+.setas{display:flex;gap:8px;justify-content:flex-end;margin-top:12px}
+.setas button{width:42px;height:42px;border-radius:50%;border:1.5px solid #d9cfc8;background:#fff;cursor:pointer;font-size:18px}
 
-/* cardápio + horário */
-.dupla{display:grid;grid-template-columns:1fr 1fr;gap:28px}
-.painel{background:var(--branco);border-radius:16px;padding:34px}
-.painel h3{font-family:"Libre Caslon Display",serif;font-weight:400;font-size:30px;margin:0 0 10px}
-.painel p{color:#4d4038;margin:0 0 22px}
-table.horas{width:100%;border-collapse:collapse;font-size:16.5px}
-table.horas td{padding:11px 4px;border-bottom:1px solid #eadfd5}
+/* formulários */
+.duas{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+@media (max-width:900px){.duas{grid-template-columns:1fr}}
+.painel{background:#fff;border:1px solid var(--linha);border-radius:18px;padding:28px}
+.painel h3{font-family:"Libre Caslon Display",serif;font-weight:400;font-size:27px;margin:0 0 6px}
+.painel>p{color:var(--suave);margin:0 0 18px}
+.campos{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.campo{display:flex;flex-direction:column;gap:5px}
+.campo.cheio{grid-column:1/-1}
+.campo label{font-size:14px;font-weight:600}
+.campo input,.campo select,.campo textarea{border:1.5px solid #ddd5cf;border-radius:10px;padding:11px 12px;background:#fff}
+.campo input[aria-invalid="true"],.campo select[aria-invalid="true"]{border-color:#c62828}
+.erro{color:#b3261e;font-size:13px;min-height:16px}
+form .btn{margin-top:14px;width:100%}
+@media (max-width:520px){.campos{grid-template-columns:1fr}}
+
+/* horário + mapa */
+table.horas{width:100%;border-collapse:collapse}
+table.horas td{padding:10px 2px;border-bottom:1px solid var(--linha)}
 table.horas td:last-child{text-align:right;font-variant-numeric:tabular-nums}
 table.horas tr.hoje td{color:var(--carmim);font-weight:700}
-table.horas tr.hoje td:first-child::after{content:" (hoje)";font-weight:500;color:var(--suave)}
-.acessivel{display:flex;gap:10px;align-items:flex-start;margin-top:22px;font-size:15px;color:#4d4038}
-@media (max-width:820px){.dupla{grid-template-columns:1fr}}
+.mapa iframe{width:100%;height:330px;border:0;border-radius:14px}
+.linha-acoes{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
 
-/* onde estamos */
-.mapa{display:grid;grid-template-columns:1fr 1.4fr;gap:28px;align-items:stretch}
-.mapa iframe{width:100%;height:100%;min-height:380px;border:0;border-radius:16px}
-.endereco{font-size:20px;font-family:"Libre Caslon Text",serif;margin:0 0 24px}
-@media (max-width:820px){.mapa{grid-template-columns:1fr}}
+/* perguntas */
+details{background:#fff;border:1px solid var(--linha);border-radius:12px;padding:0 18px;margin-bottom:10px}
+details summary{cursor:pointer;font-weight:600;padding:16px 0;list-style:none;display:flex;justify-content:space-between}
+details summary::after{content:"+";font-size:22px;line-height:1;color:var(--carmim)}
+details[open] summary::after{content:"–"}
+details p{margin:0 0 16px;color:var(--suave)}
 
-footer{background:var(--carmim-escuro);color:#f2dfe4;padding:44px 0 28px;font-size:14.5px}
-footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px}
-footer a{color:#fff}
-.zap-fixo{position:fixed;right:18px;bottom:18px;z-index:30;background:#1f9d55;color:#fff;border-radius:999px;padding:14px 20px;font-weight:700;text-decoration:none;box-shadow:0 10px 26px rgba(0,0,0,.25)}
-.zap-fixo:hover{background:#178245}
+/* painel do dono */
+.dono{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center}
+.mock{background:#fff;border:1px solid var(--linha);border-radius:18px;padding:18px;box-shadow:0 24px 50px -30px rgba(46,39,36,.4)}
+.mock .barra{display:flex;gap:6px;margin-bottom:12px}.mock .barra i{width:10px;height:10px;border-radius:50%;background:#e4dcd6}
+.mock .item{display:flex;justify-content:space-between;align-items:center;border:1px solid var(--linha);border-radius:10px;padding:10px 12px;margin-bottom:8px;font-size:15px}
+.switch{width:38px;height:22px;border-radius:999px;background:var(--verde);position:relative}.switch::after{content:"";position:absolute;right:3px;top:3px;width:16px;height:16px;border-radius:50%;background:#fff}
+.switch.off{background:#cfc6bf}.switch.off::after{right:auto;left:3px}
+.dono ul{padding-left:18px;color:#4e443e}.dono li{margin-bottom:8px}
+@media (max-width:820px){.dono{grid-template-columns:1fr}}
+
+/* gaveta do pedido */
+.gaveta{position:fixed;inset:0 0 0 auto;width:min(420px,100%);background:#fff;z-index:60;transform:translateX(100%);transition:transform .25s ease;display:flex;flex-direction:column;box-shadow:-20px 0 40px rgba(0,0,0,.15)}
+.gaveta.aberta{transform:none}
+.fundo-gaveta{position:fixed;inset:0;background:rgba(46,39,36,.35);z-index:55;opacity:0;pointer-events:none;transition:opacity .2s}
+.fundo-gaveta.aberto{opacity:1;pointer-events:auto}
+.gaveta header{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;border-bottom:1px solid var(--linha)}
+.gaveta header h3{margin:0;font-family:"Libre Caslon Display",serif;font-weight:400;font-size:26px}
+.gaveta .itens{flex:1;overflow:auto;padding:12px 20px}
+.linha-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--linha)}
+.linha-item span{flex:1}
+.qtd{display:flex;align-items:center;border:1.5px solid #ddd5cf;border-radius:10px}
+.qtd button{border:0;background:transparent;width:32px;height:32px;cursor:pointer;font-size:18px}
+.gaveta footer{padding:16px 20px;border-top:1px solid var(--linha)}
+.fechar{border:0;background:transparent;font-size:26px;cursor:pointer}
+
+footer.rodape{background:#fff;border-top:1px solid var(--linha);padding:40px 0 30px;font-size:14.5px;color:#5d524c}
+footer.rodape .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:var(--tinta);color:#fff;padding:12px 18px;border-radius:12px;opacity:0;transition:.25s;z-index:70;font-size:15px}
+.toast.on{opacity:1;transform:translateX(-50%)}
+.flutuante{position:fixed;right:16px;bottom:16px;z-index:50;background:var(--verde);color:#fff;border-radius:999px;padding:13px 18px;font-weight:700;text-decoration:none;box-shadow:0 10px 24px rgba(0,0,0,.2)}
 </style>
 </head>
 <body>
 
-<div class="demo" role="note">Prévia de demonstração preparada por <strong>RPM Automações</strong> para o Biriba's · fica no ar por 48 horas · não coleta nenhum dado de quem acessa (LGPD)</div>
+<div class="demo" role="note">Prévia de demonstração feita pela <b>RPM Automações</b> para o Biriba's. Fica no ar por 48 horas e não coleta dados de quem acessa (LGPD). Pedidos e reservas apenas montam a mensagem no WhatsApp.</div>
 
-<header class="letreiro">
+<header class="topo">
   <div class="wrap">
-    <a class="marca" href="#inicio" aria-label="Biriba's restaurante, início">Biriba's<small>restaurante</small></a>
-    <nav aria-label="Seções">
-      <a href="#roda">A roda de fogo</a>
+    <a class="marca" href="#inicio">Biriba's<small>restaurante</small></a>
+    <nav class="nav" aria-label="Seções">
+      <a href="#cardapio">Cardápio</a>
+      <a href="#parada">Sua parada</a>
+      <a href="#reservar">Reservar</a>
       <a href="#clientes">Clientes</a>
-      <a href="#horario">Horário</a>
       <a href="#chegar">Como chegar</a>
     </nav>
+    <button class="pedido-btn" id="abrirPedido" aria-haspopup="dialog">Meu pedido <span class="qt" id="qtPedido">0</span></button>
   </div>
 </header>
 
 <main id="inicio">
   <section class="abertura">
-    <div class="texto">
-      <span class="status" id="status"><i></i><span>Verificando horário…</span></span>
-      <h1>Almoço de verdade em Campo do Tenente</h1>
-      <p class="lead">Carne assando na roda de fogo, ambiente limpo e caprichado e um atendimento que faz quem está de passagem querer voltar.</p>
-      <div class="acoes">
-        <a class="btn btn-zap" href="https://wa.me/5541987884888?text=Ol%C3%A1%2C%20Biriba%27s!%20Gostaria%20de%20saber%20o%20card%C3%A1pio%20de%20hoje." target="_blank" rel="noopener">Pedir ou reservar no WhatsApp</a>
-        <a class="btn btn-mapa" href="#chegar">Como chegar</a>
-      </div>
-      <div class="provas">
-        <div><b>4,7</b>nota no Google</div>
-        <div><b>213</b>avaliações</div>
-        <div><b>3,1 mil</b>seguidores no Instagram</div>
-      </div>
-    </div>
-    <figure class="foto">
-      <img src="img/fachada.jpg" alt="Fachada do Biriba's Restaurante com o letreiro vermelho e a roda de fogo assando carne na frente" width="1600" height="2000" fetchpriority="high">
-      <figcaption>Foto: Google Maps</figcaption>
-    </figure>
-  </section>
-
-  <section class="roda" id="roda">
     <div class="wrap">
-      <svg viewBox="0 0 400 420" role="img" aria-label="Ilustração da roda de fogo do Biriba's">
-        <defs>
-          <radialGradient id="brasa" cx="50%" cy="100%" r="70%"><stop offset="0" stop-color="#ffcf73"/><stop offset=".45" stop-color="#f2913a"/><stop offset="1" stop-color="#9b1336" stop-opacity="0"/></radialGradient>
-        </defs>
-        <ellipse class="chama" cx="200" cy="372" rx="170" ry="46" fill="url(#brasa)"/>
-        <g class="giro" fill="none" stroke="#e9ddd3" stroke-linecap="round">
-          <circle cx="200" cy="200" r="150" stroke-width="10"/>
-          <circle cx="200" cy="200" r="132" stroke-width="3" opacity=".5"/>
-          <g stroke-width="4" opacity=".75">
-            <line x1="200" y1="50" x2="200" y2="350"/><line x1="50" y1="200" x2="350" y2="200"/>
-            <line x1="94" y1="94" x2="306" y2="306"/><line x1="306" y1="94" x2="94" y2="306"/>
-          </g>
-          <g fill="#7a3a22" stroke="#f2913a" stroke-width="2">
-            <rect x="185" y="28" width="30" height="46" rx="6"/><rect x="185" y="326" width="30" height="46" rx="6"/>
-            <rect x="28" y="185" width="46" height="30" rx="6"/><rect x="326" y="185" width="46" height="30" rx="6"/>
-            <rect x="77" y="77" width="34" height="34" rx="6" transform="rotate(45 94 94)"/><rect x="289" y="289" width="34" height="34" rx="6" transform="rotate(45 306 306)"/>
-            <rect x="289" y="77" width="34" height="34" rx="6" transform="rotate(45 306 94)"/><rect x="77" y="289" width="34" height="34" rx="6" transform="rotate(45 94 306)"/>
-          </g>
-          <circle cx="200" cy="200" r="16" fill="#e9ddd3" stroke="none"/>
-        </g>
-        <path d="M150 400 L200 210 L250 400" fill="none" stroke="#bfb2a7" stroke-width="7" stroke-linejoin="round"/>
-      </svg>
       <div>
-        <h2>A roda de fogo na porta é o nosso cartão de visita</h2>
-        <p>Quem passa pela Av. Miguel Komarchewski vê a carne girando devagar sobre as brasas, na frente da casa. É assim que o Biriba's chama para o almoço.</p>
-        <p>Por fora a fachada é simples. Por dentro, como escreveu um cliente que estava de passagem, "tudo um capricho só".</p>
-        <a class="btn btn-zap" style="margin-top:12px" href="https://wa.me/5541987884888?text=Ol%C3%A1%2C%20Biriba%27s!%20O%20que%20tem%20na%20roda%20hoje%3F" target="_blank" rel="noopener">Perguntar o que tem hoje</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="clara" id="clientes">
-    <div class="wrap">
-      <h2 class="titulo">Quem passa, volta</h2>
-      <p class="sub">Palavras de clientes no Google, sem edição.</p>
-      <div class="vozes">
-        <blockquote class="grande">
-          <div>
-            <div class="estrelas" aria-label="5 estrelas">★★★★★</div>
-            <p>"Estava de passagem na cidade, achei excelente o lugar, limpíssimo, confortável, atendimento impecável, comida muito boa, bem apresentada. Quem passa por fora e vê a fachada modesta não imagina o quão maravilhoso é por dentro. Tudo um capricho só."</p>
-          </div>
-          <cite>Luciano Granja</cite>
-        </blockquote>
-        <blockquote>
-          <div class="estrelas" aria-label="5 estrelas">★★★★★</div>
-          <p>"Ótimo pessoal, atencioso, boa comida, uma variedade boa, preço acessível. Estão de parabéns."</p>
-          <cite>Paulo Moraes</cite>
-        </blockquote>
-        <blockquote>
-          <div class="estrelas" aria-label="5 estrelas">★★★★★</div>
-          <p>"Muito bom, super indico para levar a família toda."</p>
-          <cite>Dirce Vailatti</cite>
-        </blockquote>
-      </div>
-    </div>
-  </section>
-
-  <section class="clara" id="horario" style="padding-top:0">
-    <div class="wrap dupla">
-      <div class="painel">
-        <h3>Cardápio do dia</h3>
-        <p>O cardápio muda conforme o dia. Mande uma mensagem e receba o de hoje, ou reserve a mesa para a família.</p>
-        <a class="btn btn-zap" href="https://wa.me/5541987884888?text=Ol%C3%A1%2C%20Biriba%27s!%20Pode%20me%20mandar%20o%20card%C3%A1pio%20de%20hoje%3F" target="_blank" rel="noopener">Receber o cardápio de hoje</a>
-        <p style="margin-top:22px">Fotos dos pratos e novidades no Instagram <a href="https://www.instagram.com/biribas.restaurante/" target="_blank" rel="noopener">@biribas.restaurante</a>.</p>
-      </div>
-      <div class="painel">
-        <h3>Horário de almoço</h3>
-        <table class="horas" id="tabela-horas">
-          <tbody>
-            <tr data-dia="1"><td>Segunda</td><td>10h às 14h</td></tr>
-            <tr data-dia="2"><td>Terça</td><td>10h às 14h</td></tr>
-            <tr data-dia="3"><td>Quarta</td><td>10h às 14h</td></tr>
-            <tr data-dia="4"><td>Quinta</td><td>10h às 14h</td></tr>
-            <tr data-dia="5"><td>Sexta</td><td>10h às 14h</td></tr>
-            <tr data-dia="6"><td>Sábado</td><td>10h30 às 14h30</td></tr>
-            <tr data-dia="0"><td>Domingo</td><td>Fechado</td></tr>
-          </tbody>
-        </table>
-        <div class="acessivel"><span aria-hidden="true">♿</span><span>Entrada, banheiro, assentos e estacionamento acessíveis para cadeirantes.</span></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="clara" id="chegar" style="padding-top:0">
-    <div class="wrap mapa">
-      <div class="painel">
-        <h3>Onde estamos</h3>
-        <p class="endereco">Av. Miguel Komarchewski, 2350<br>Campo do Tenente, PR · 83870-000</p>
+        <span class="status" id="status"><i></i><span>Verificando horário…</span></span>
+        <h1>Almoço de verdade em Campo do Tenente</h1>
+        <p class="lead">Carne girando na roda de fogo, ambiente limpo e caprichado e um atendimento que faz quem está de passagem querer voltar.</p>
         <div class="acoes">
-          <a class="btn btn-zap" href="https://www.google.com/maps/search/?api=1&query=Biriba%27s+Restaurante+Campo+do+Tenente" target="_blank" rel="noopener">Abrir no Google Maps</a>
-          <a class="btn btn-mapa" href="tel:+5541987884888">(41) 98788-4888</a>
+          <a class="btn btn-p" href="#cardapio">Ver o cardápio</a>
+          <a class="btn btn-s" href="#reservar">Reservar mesa</a>
+        </div>
+        <div class="provas">
+          <div><b>4,7</b>nota no Google</div>
+          <div><b>213</b>avaliações</div>
+          <div><b>3,1 mil</b>no Instagram</div>
         </div>
       </div>
-      <iframe title="Mapa do Biriba's Restaurante" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Biriba%27s+Restaurante,+Av.+Miguel+Komarchewski,+2350,+Campo+do+Tenente+-+PR&output=embed"></iframe>
+      <figure class="foto-hero" style="margin:0">
+        <img src="img/fachada.jpg" alt="Fachada do Biriba's Restaurante com letreiro vermelho e a roda de fogo assando carne na frente" width="1600" height="2000" fetchpriority="high">
+        <figcaption>Foto: Google Maps</figcaption>
+        <div class="selo"><strong>★ 4,7</strong>213 avaliações</div>
+      </figure>
+    </div>
+  </section>
+
+  <section class="bloco alt" id="cardapio">
+    <div class="wrap">
+      <h2>Cardápio</h2>
+      <p class="sub">Busque, filtre e monte seu pedido para retirada ou encomenda. Ao enviar, abrimos o WhatsApp com tudo escrito.</p>
+      <p class="aviso-ilustrativo">Itens ilustrativos para esta demonstração. No site definitivo, o Biriba's atualiza o cardápio do dia pelo próprio painel.</p>
+      <div class="cardapio-top">
+        <label class="busca"><span aria-hidden="true">⌕</span><span class="sr">Buscar no cardápio</span><input id="busca" type="search" placeholder="Buscar prato, ex.: costela" autocomplete="off"></label>
+        <div class="vista" role="group" aria-label="Modo de exibição">
+          <button id="vGrade" aria-pressed="true" title="Grade">▦</button>
+          <button id="vLista" aria-pressed="false" title="Lista">☰</button>
+        </div>
+      </div>
+      <div class="chips" id="chips" role="group" aria-label="Filtrar por categoria" style="margin-bottom:18px"></div>
+      <div class="grade" id="grade" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section class="bloco" id="parada">
+    <div class="wrap">
+      <h2>Planeje sua parada</h2>
+      <p class="sub">Para quem está de passagem pela região ou vem com a família, tudo em quatro passos.</p>
+      <div class="trilha" id="trilha">
+        <div class="progresso" id="progresso"></div>
+        <div class="passo"><span class="bola">1</span><h3>Veja se está aberto</h3><p>O status no topo mostra na hora se o almoço está servindo.</p></div>
+        <div class="passo"><span class="bola">2</span><h3>Reserve ou encomende</h3><p>Monte o pedido ou reserve a mesa e mande pelo WhatsApp.</p></div>
+        <div class="passo"><span class="bola">3</span><h3>Trace a rota</h3><p>Um toque abre o caminho até a Av. Miguel Komarchewski, 2350.</p></div>
+        <div class="passo"><span class="bola">4</span><h3>Bom almoço</h3><p>Ambiente acessível, mesa pronta e a roda de fogo acesa na frente.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bloco alt">
+    <div class="wrap roda">
+      <svg viewBox="0 0 400 420" role="img" aria-label="Ilustração da roda de fogo">
+        <defs><radialGradient id="br" cx="50%" cy="100%" r="70%"><stop offset="0" stop-color="#ffd38a"/><stop offset=".5" stop-color="#e9862f" stop-opacity=".7"/><stop offset="1" stop-color="#e9862f" stop-opacity="0"/></radialGradient></defs>
+        <ellipse cx="200" cy="372" rx="170" ry="42" fill="url(#br)"/>
+        <g class="giro" fill="none" stroke="#2e2724" stroke-linecap="round">
+          <circle cx="200" cy="200" r="150" stroke-width="8"/>
+          <g stroke-width="3" opacity=".5"><line x1="200" y1="50" x2="200" y2="350"/><line x1="50" y1="200" x2="350" y2="200"/><line x1="94" y1="94" x2="306" y2="306"/><line x1="306" y1="94" x2="94" y2="306"/></g>
+          <g fill="#b9512b" stroke="#9b1336" stroke-width="2">
+            <rect x="185" y="28" width="30" height="44" rx="6"/><rect x="185" y="328" width="30" height="44" rx="6"/><rect x="28" y="185" width="44" height="30" rx="6"/><rect x="328" y="185" width="44" height="30" rx="6"/>
+            <rect x="78" y="78" width="32" height="32" rx="6" transform="rotate(45 94 94)"/><rect x="290" y="290" width="32" height="32" rx="6" transform="rotate(45 306 306)"/><rect x="290" y="78" width="32" height="32" rx="6" transform="rotate(45 306 94)"/><rect x="78" y="290" width="32" height="32" rx="6" transform="rotate(45 94 306)"/>
+          </g>
+          <circle cx="200" cy="200" r="14" fill="#2e2724" stroke="none"/>
+        </g>
+        <path d="M150 400 L200 212 L250 400" fill="none" stroke="#8d847e" stroke-width="6" stroke-linejoin="round"/>
+      </svg>
+      <div>
+        <h2>A roda de fogo na porta</h2>
+        <p class="sub" style="margin-bottom:14px">Quem passa pela avenida vê a carne girando devagar sobre as brasas, na frente da casa. Por fora a fachada é simples; por dentro, como escreveu um cliente que estava de passagem, "tudo um capricho só".</p>
+        <a class="btn btn-z" target="_blank" rel="noopener" href="https://wa.me/5541987884888?text=Ol%C3%A1%2C%20Biriba%27s!%20O%20que%20tem%20na%20roda%20hoje%3F">Perguntar o que tem na roda hoje</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="bloco" id="reservar">
+    <div class="wrap">
+      <h2>Reservas e grupos</h2>
+      <p class="sub">Preencha e enviamos tudo certinho pelo WhatsApp. Nada fica salvo nesta página.</p>
+      <div class="duas">
+        <form class="painel" id="fReserva" novalidate>
+          <h3>Reservar mesa</h3>
+          <p>Para o almoço de segunda a sábado.</p>
+          <div class="campos">
+            <div class="campo cheio"><label for="rNome">Seu nome</label><input id="rNome" required autocomplete="name"><span class="erro"></span></div>
+            <div class="campo"><label for="rTel">WhatsApp com DDD</label><input id="rTel" inputmode="tel" placeholder="(41) 90000-0000" required><span class="erro"></span></div>
+            <div class="campo"><label for="rPessoas">Pessoas</label><input id="rPessoas" type="number" min="1" max="80" value="2" required><span class="erro"></span></div>
+            <div class="campo"><label for="rData">Data</label><input id="rData" type="date" required><span class="erro"></span></div>
+            <div class="campo"><label for="rHora">Horário</label><select id="rHora" required></select><span class="erro"></span></div>
+            <div class="campo cheio"><label for="rObs">Observação (opcional)</label><input id="rObs" placeholder="aniversário, cadeira de bebê, acessibilidade…"></div>
+          </div>
+          <button class="btn btn-z" type="submit">Enviar reserva no WhatsApp</button>
+        </form>
+        <form class="painel" id="fGrupo" novalidate>
+          <h3>Grupos, empresas e excursões</h3>
+          <p>Almoço para equipes, ônibus de viagem, confraternizações e eventos.</p>
+          <div class="campos">
+            <div class="campo cheio"><label for="gNome">Nome ou empresa</label><input id="gNome" required><span class="erro"></span></div>
+            <div class="campo"><label for="gTipo">Tipo</label><select id="gTipo"><option>Empresa / equipe</option><option>Excursão / ônibus</option><option>Aniversário / família</option><option>Outro</option></select></div>
+            <div class="campo"><label for="gPessoas">Pessoas (aprox.)</label><input id="gPessoas" type="number" min="5" max="300" value="15" required><span class="erro"></span></div>
+            <div class="campo cheio"><label for="gData">Data prevista</label><input id="gData" type="date" required><span class="erro"></span></div>
+          </div>
+          <button class="btn btn-p" type="submit">Pedir orçamento no WhatsApp</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="bloco alt" id="clientes">
+    <div class="wrap carrossel">
+      <h2>Quem passa, volta</h2>
+      <p class="sub">Avaliações reais no Google, sem edição.</p>
+      <div class="trilho" id="trilho">
+        <blockquote class="voz"><div class="est">★★★★★</div><p>"Estava de passagem na cidade, achei excelente o lugar, limpíssimo, confortável, atendimento impecável, comida muito boa, bem apresentada. Quem passa por fora e vê a fachada modesta não imagina o quão maravilhoso é por dentro. Tudo um capricho só."</p><cite>Luciano Granja</cite></blockquote>
+        <blockquote class="voz"><div class="est">★★★★★</div><p>"Ótimo pessoal, atencioso, boa comida, uma variedade boa, preço acessível. Estão de parabéns."</p><cite>Paulo Moraes</cite></blockquote>
+        <blockquote class="voz"><div class="est">★★★★★</div><p>"Comida muito saborosa, ótimo atendimento, ambiente muito bem organizado."</p><cite>Cliente no Google</cite></blockquote>
+        <blockquote class="voz"><div class="est">★★★★★</div><p>"Muito bom, super indico para levar a família toda."</p><cite>Dirce Vailatti</cite></blockquote>
+        <blockquote class="voz"><div class="est">★★★★★</div><p>"Almoço muito bom. No geral, tudo muito bom."</p><cite>Pedro Davi Prestes</cite></blockquote>
+      </div>
+      <div class="setas"><button id="voltar" aria-label="Avaliação anterior">←</button><button id="avancar" aria-label="Próxima avaliação">→</button></div>
+    </div>
+  </section>
+
+  <section class="bloco" id="chegar">
+    <div class="wrap duas">
+      <div class="painel">
+        <h3>Horário de almoço</h3>
+        <table class="horas" id="horas"><tbody>
+          <tr data-d="1"><td>Segunda</td><td>10h às 14h</td></tr><tr data-d="2"><td>Terça</td><td>10h às 14h</td></tr>
+          <tr data-d="3"><td>Quarta</td><td>10h às 14h</td></tr><tr data-d="4"><td>Quinta</td><td>10h às 14h</td></tr>
+          <tr data-d="5"><td>Sexta</td><td>10h às 14h</td></tr><tr data-d="6"><td>Sábado</td><td>10h30 às 14h30</td></tr>
+          <tr data-d="0"><td>Domingo</td><td>Fechado</td></tr>
+        </tbody></table>
+        <p style="margin:16px 0 0;color:var(--suave);font-size:15px">♿ Entrada, banheiro, assentos e estacionamento acessíveis para cadeirantes.</p>
+      </div>
+      <div class="painel mapa">
+        <h3>Como chegar</h3>
+        <p>Av. Miguel Komarchewski, 2350 · Campo do Tenente, PR</p>
+        <iframe title="Mapa do Biriba's" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Biriba%27s+Restaurante,+Av.+Miguel+Komarchewski,+2350,+Campo+do+Tenente+-+PR&output=embed"></iframe>
+        <div class="linha-acoes">
+          <a class="btn btn-p" id="rota" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Biriba%27s+Restaurante+Campo+do+Tenente+PR">Traçar rota daqui</a>
+          <button class="btn btn-s" id="compartilhar" type="button">Compartilhar</button>
+          <button class="btn btn-s" id="contato" type="button">Salvar contato</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bloco alt">
+    <div class="wrap">
+      <h2>Perguntas frequentes</h2>
+      <p class="sub">O que mais perguntam antes de vir.</p>
+      <details><summary>Qual o horário do almoço?</summary><p>De segunda a sexta, das 10h às 14h. Sábado, das 10h30 às 14h30. Domingo fechado.</p></details>
+      <details><summary>Dá para reservar mesa?</summary><p>Sim. Use o formulário de reserva acima ou chame no WhatsApp (41) 98788-4888.</p></details>
+      <details><summary>Atendem grupos, empresas e ônibus?</summary><p>Sim, peça o orçamento pelo formulário de grupos e combine os detalhes pelo WhatsApp.</p></details>
+      <details><summary>O restaurante é acessível?</summary><p>Sim: entrada, banheiro, assentos e estacionamento acessíveis para cadeirantes.</p></details>
+      <details><summary>Onde vejo o cardápio do dia?</summary><p>Mande uma mensagem no WhatsApp ou acompanhe o Instagram @biribas.restaurante.</p></details>
+    </div>
+  </section>
+
+  <section class="bloco">
+    <div class="wrap dono">
+      <div>
+        <h2>No site definitivo, quem manda é o Biriba's</h2>
+        <p class="sub">Um painel simples, pelo celular, para manter tudo atualizado sem depender de ninguém.</p>
+        <ul>
+          <li>Publicar o cardápio do dia e marcar o que acabou.</li>
+          <li>Trocar fotos, horários e avisos de feriado.</li>
+          <li>Receber reservas e encomendas organizadas no WhatsApp.</li>
+          <li>Aparecer no Google para quem procura onde almoçar na região.</li>
+        </ul>
+      </div>
+      <div class="mock" aria-hidden="true">
+        <div class="barra"><i></i><i></i><i></i></div>
+        <div class="item"><span>Costela na roda</span><span class="switch"></span></div>
+        <div class="item"><span>Frango assado</span><span class="switch"></span></div>
+        <div class="item"><span>Feijoada (sábado)</span><span class="switch off"></span></div>
+        <div class="item"><span>Aviso: fechado no feriado</span><span class="switch off"></span></div>
+      </div>
     </div>
   </section>
 </main>
 
-<footer>
+<footer class="rodape">
   <div class="wrap">
-    <div><strong>Biriba's Restaurante</strong><br>Av. Miguel Komarchewski, 2350 · Campo do Tenente, PR<br>WhatsApp <a href="https://wa.me/5541987884888">(41) 98788-4888</a> · <a href="https://www.instagram.com/biribas.restaurante/">Instagram</a></div>
-    <div style="max-width:420px">Prévia criada por <a href="https://wa.me/5541984425528">Ramon Mendes · RPM Automações</a> para apresentação. Marca, fotos e avaliações pertencem ao Biriba's e aos seus autores. Esta página fica no ar por 48 horas e não usa cookies nem coleta dados.</div>
+    <div><strong style="color:var(--carmim)">Biriba's Restaurante</strong><br>Av. Miguel Komarchewski, 2350 · Campo do Tenente, PR<br>WhatsApp <a href="https://wa.me/5541987884888">(41) 98788-4888</a> · <a href="https://www.instagram.com/biribas.restaurante/" target="_blank" rel="noopener">Instagram</a></div>
+    <div style="max-width:440px">Prévia criada por Ramon Mendes · RPM Automações. Marca, foto e avaliações pertencem ao Biriba's e aos seus autores. Itens do cardápio são ilustrativos. Sem cookies e sem coleta de dados.</div>
   </div>
 </footer>
 
-<a class="zap-fixo" href="https://wa.me/5541987884888?text=Ol%C3%A1%2C%20Biriba%27s!" target="_blank" rel="noopener" aria-label="Falar com o Biriba's no WhatsApp">WhatsApp</a>
+<div class="fundo-gaveta" id="fundo"></div>
+<aside class="gaveta" id="gaveta" role="dialog" aria-modal="true" aria-labelledby="tGaveta">
+  <header><h3 id="tGaveta">Meu pedido</h3><button class="fechar" id="fecharPedido" aria-label="Fechar">×</button></header>
+  <div class="itens" id="itens"></div>
+  <footer>
+    <div class="campo" style="margin-bottom:10px"><label for="pTipo">Como prefere?</label><select id="pTipo"><option>Retirar no restaurante</option><option>Encomenda para um dia específico</option></select></div>
+    <div class="campo" style="margin-bottom:12px"><label for="pNome">Seu nome</label><input id="pNome" autocomplete="name"></div>
+    <button class="btn btn-z" id="enviarPedido" style="width:100%">Enviar pedido no WhatsApp</button>
+  </footer>
+</aside>
+<div class="toast" id="toast" role="status"></div>
+<a class="flutuante" href="https://wa.me/5541987884888?text=Ol%C3%A1%2C%20Biriba%27s!" target="_blank" rel="noopener">WhatsApp</a>
 
 <script>
-// Status aberto/fechado calculado no fuso de Campo do Tenente (America/Sao_Paulo)
 (function(){
-  var horas={1:[600,840],2:[600,840],3:[600,840],4:[600,840],5:[600,840],6:[630,870],0:null};
-  var agora=new Date(new Date().toLocaleString("en-US",{timeZone:"America/Sao_Paulo"}));
-  var dia=agora.getDay(), min=agora.getHours()*60+agora.getMinutes();
-  var linha=document.querySelector('#tabela-horas tr[data-dia="'+dia+'"]'); if(linha) linha.classList.add('hoje');
-  var el=document.getElementById('status'), txt=el.querySelector('span'), h=horas[dia];
-  function fmt(m){var hh=Math.floor(m/60), mm=m%60; return hh+'h'+(mm?String(mm).padStart(2,'0'):'');}
-  if(h && min>=h[0] && min<h[1]){el.classList.add('aberto'); txt.textContent='Aberto agora · almoço até '+fmt(h[1]);}
-  else if(h && min<h[0]){txt.textContent='Abre hoje às '+fmt(h[0]);}
-  else{var p=(dia+1)%7, n=1; while(!horas[p]){p=(p+1)%7;n++;} txt.textContent='Fechado agora · abre '+(n===1?'amanhã':'na segunda')+' às '+fmt(horas[p][0]);}
+  const ZAP="5541987884888";
+  const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+  const guardar=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+  const ler=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}};
+  const toast=m=>{const t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove("on"),2200)};
+  const zap=txt=>window.open("https://wa.me/"+ZAP+"?text="+encodeURIComponent(txt),"_blank","noopener");
+
+  /* horário e status */
+  const H={1:[600,840],2:[600,840],3:[600,840],4:[600,840],5:[600,840],6:[630,870],0:null};
+  const agora=new Date(new Date().toLocaleString("en-US",{timeZone:"America/Sao_Paulo"}));
+  const dia=agora.getDay(), min=agora.getHours()*60+agora.getMinutes();
+  const fmt=m=>Math.floor(m/60)+"h"+(m%60?String(m%60).padStart(2,"0"):"");
+  $('#horas tr[data-d="'+dia+'"]')?.classList.add("hoje");
+  const st=$("#status"), sx=st.querySelector("span"), h=H[dia];
+  if(h&&min>=h[0]&&min<h[1]){st.classList.add("aberto");sx.textContent="Aberto agora · almoço até "+fmt(h[1])}
+  else if(h&&min<h[0]){sx.textContent="Abre hoje às "+fmt(h[0])}
+  else{let p=(dia+1)%7,n=1;while(!H[p]){p=(p+1)%7;n++}sx.textContent="Fechado agora · abre "+(n===1?"amanhã":"segunda")+" às "+fmt(H[p][0])}
+
+  /* cardápio ilustrativo */
+  const ITENS=[
+    {id:"costela",n:"Costela na roda de fogo",c:"Na roda",d:"Assada devagar sobre as brasas, na frente da casa.",i:"🔥"},
+    {id:"frango",n:"Frango assado na brasa",c:"Na roda",d:"Coxa e sobrecoxa douradas no fogo.",i:"🍗"},
+    {id:"linguica",n:"Linguiça campeira",c:"Na roda",d:"Para acompanhar o prato do dia.",i:"🌭"},
+    {id:"buffet",n:"Prato feito do dia",c:"Pratos",d:"Arroz, feijão, salada, acompanhamentos e a carne da roda.",i:"🍽️"},
+    {id:"marmita",n:"Marmita para viagem",c:"Pratos",d:"O almoço do dia embalado para levar.",i:"🥡"},
+    {id:"executivo",n:"Executivo do dia",c:"Pratos",d:"Opção individual servida à mesa.",i:"🥘"},
+    {id:"salada",n:"Salada completa",c:"Pratos",d:"Folhas, legumes e grãos da estação.",i:"🥗",t:["Vegetariano"]},
+    {id:"mandioca",n:"Mandioca frita",c:"Acompanhamentos",d:"Crocante por fora, macia por dentro.",i:"🍟",t:["Vegetariano"]},
+    {id:"farofa",n:"Farofa da casa",c:"Acompanhamentos",d:"Para acompanhar a carne da roda.",i:"🥣"},
+    {id:"pudim",n:"Pudim de leite",c:"Sobremesas",d:"Clássico de família.",i:"🍮",t:["Vegetariano"]},
+    {id:"sagu",n:"Sagu com creme",c:"Sobremesas",d:"Tradição do Sul.",i:"🍇",t:["Vegetariano"]},
+    {id:"suco",n:"Suco natural",c:"Bebidas",d:"Sabor do dia.",i:"🧃",t:["Vegetariano"]},
+    {id:"refri",n:"Refrigerante lata",c:"Bebidas",d:"Gelado.",i:"🥤",t:["Vegetariano"]}
+  ];
+  const CATS=["Todos","Favoritos","Na roda","Pratos","Acompanhamentos","Sobremesas","Bebidas"];
+  let cat="Todos", termo="", favs=new Set(ler("b_favs",[])), pedido=ler("b_pedido",{});
+  const chips=$("#chips");
+  CATS.forEach(c=>{const b=document.createElement("button");b.className="chip";b.textContent=c;b.setAttribute("aria-pressed",c===cat);b.onclick=()=>{cat=c;$$(".chip").forEach(x=>x.setAttribute("aria-pressed",x.textContent===c));render()};chips.appendChild(b)});
+  const norm=s=>s.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
+  function render(){
+    const g=$("#grade"); g.innerHTML="";
+    const lst=ITENS.filter(x=>(cat==="Todos"||(cat==="Favoritos"?favs.has(x.id):x.c===cat))&&(!termo||norm(x.n+" "+x.d).includes(norm(termo))));
+    if(!lst.length){g.innerHTML='<div class="vazio">Nada encontrado'+(cat==="Favoritos"?'. Toque no coração de um prato para salvar aqui.':'. Tente outra palavra ou categoria.')+'</div>';return}
+    lst.forEach(x=>{
+      const q=pedido[x.id]||0, el=document.createElement("article");el.className="prato";
+      el.innerHTML='<div style="display:flex;gap:12px;align-items:center"><span class="ico" aria-hidden="true">'+x.i+'</span><div><h3>'+x.n+'</h3><p>'+x.d+'</p></div></div>'+
+        '<div class="rodape">'+(x.t||[]).map(t=>'<span class="tag">'+t+'</span>').join("")+
+        '<button class="fav" aria-label="Favoritar '+x.n+'" aria-pressed="'+favs.has(x.id)+'">♥</button>'+
+        '<button class="add'+(q?' no':'')+'">'+(q?'No pedido ('+q+')':'Adicionar')+'</button></div>';
+      el.querySelector(".fav").onclick=e=>{favs.has(x.id)?favs.delete(x.id):favs.add(x.id);guardar("b_favs",[...favs]);render()};
+      el.querySelector(".add").onclick=()=>{pedido[x.id]=(pedido[x.id]||0)+1;salvarPedido();toast(x.n+" no pedido");render()};
+      g.appendChild(el)});
+  }
+  $("#busca").addEventListener("input",e=>{termo=e.target.value;render()});
+  $("#vGrade").onclick=()=>{$("#grade").classList.remove("lista");$("#vGrade").setAttribute("aria-pressed",true);$("#vLista").setAttribute("aria-pressed",false)};
+  $("#vLista").onclick=()=>{$("#grade").classList.add("lista");$("#vLista").setAttribute("aria-pressed",true);$("#vGrade").setAttribute("aria-pressed",false)};
+
+  /* pedido */
+  function salvarPedido(){Object.keys(pedido).forEach(k=>{if(pedido[k]<=0)delete pedido[k]});guardar("b_pedido",pedido);
+    $("#qtPedido").textContent=Object.values(pedido).reduce((a,b)=>a+b,0);desenharPedido()}
+  function desenharPedido(){const box=$("#itens");box.innerHTML="";const ks=Object.keys(pedido);
+    if(!ks.length){box.innerHTML='<p style="color:var(--suave)">Seu pedido está vazio. Adicione pratos pelo cardápio.</p>';return}
+    ks.forEach(k=>{const x=ITENS.find(i=>i.id===k);const l=document.createElement("div");l.className="linha-item";
+      l.innerHTML='<span>'+x.n+'</span><div class="qtd"><button aria-label="Menos">−</button><b style="min-width:22px;text-align:center">'+pedido[k]+'</b><button aria-label="Mais">+</button></div>';
+      const [m,p]=l.querySelectorAll("button");m.onclick=()=>{pedido[k]--;salvarPedido();render()};p.onclick=()=>{pedido[k]++;salvarPedido();render()};box.appendChild(l)})}
+  const abrir=()=>{$("#gaveta").classList.add("aberta");$("#fundo").classList.add("aberto");$("#fecharPedido").focus()};
+  const fechar=()=>{$("#gaveta").classList.remove("aberta");$("#fundo").classList.remove("aberto")};
+  $("#abrirPedido").onclick=abrir;$("#fecharPedido").onclick=fechar;$("#fundo").onclick=fechar;
+  document.addEventListener("keydown",e=>{if(e.key==="Escape")fechar()});
+  $("#enviarPedido").onclick=()=>{const ks=Object.keys(pedido);if(!ks.length){toast("Adicione ao menos um prato");return}
+    const nome=$("#pNome").value.trim();
+    zap("Olá, Biriba's! Gostaria de fazer um pedido ("+$("#pTipo").value.toLowerCase()+"):\n"+ks.map(k=>"• "+pedido[k]+"x "+ITENS.find(i=>i.id===k).n).join("\n")+(nome?"\n\nNome: "+nome:""))};
+  salvarPedido();render();
+
+  /* linha do tempo acompanhando a rolagem */
+  const trilha=$("#trilha"), passos=$$(".passo"), prog=$("#progresso");
+  function avancar(){const r=trilha.getBoundingClientRect(), vh=innerHeight;
+    const f=Math.min(1,Math.max(0,(vh*.85-r.top)/(r.height+vh*.4)));prog.style.width=(f*100)+"%";
+    passos.forEach((p,i)=>p.classList.toggle("ok",f>=(i+.5)/passos.length))}
+  addEventListener("scroll",avancar,{passive:true});avancar();
+
+  /* carrossel */
+  const tr=$("#trilho");$("#avancar").onclick=()=>tr.scrollBy({left:tr.clientWidth*.8,behavior:"smooth"});$("#voltar").onclick=()=>tr.scrollBy({left:-tr.clientWidth*.8,behavior:"smooth"});
+
+  /* formulários com validação */
+  const tel=$("#rTel");tel.addEventListener("input",()=>{let d=tel.value.replace(/\D/g,"").slice(0,11);
+    tel.value=d.length>6?"("+d.slice(0,2)+") "+d.slice(2,d.length-4)+"-"+d.slice(-4):d.length>2?"("+d.slice(0,2)+") "+d.slice(2):d});
+  const hoje=agora.toISOString().slice(0,10);["#rData","#gData"].forEach(s=>$(s).min=hoje);
+  const hora=$("#rHora");function horarios(){const v=$("#rData").value;hora.innerHTML="";
+    const d=v?new Date(v+"T12:00:00").getDay():null;const j=d===null?[600,840]:H[d];
+    if(!j){hora.innerHTML='<option value="">Fechado neste dia</option>';return}
+    for(let m=j[0];m<=j[1]-30;m+=30){const o=document.createElement("option");o.textContent=fmt(m);hora.appendChild(o)}}
+  $("#rData").addEventListener("change",horarios);horarios();
+  function erro(el,msg){el.setAttribute("aria-invalid",!!msg);const s=el.parentElement.querySelector(".erro");if(s)s.textContent=msg||"";return !msg}
+  $("#fReserva").addEventListener("submit",e=>{e.preventDefault();
+    const n=$("#rNome"),t=$("#rTel"),p=$("#rPessoas"),d=$("#rData");let ok=true;
+    ok=erro(n,n.value.trim().length<2?"Informe seu nome":"")&&ok;
+    ok=erro(t,t.value.replace(/\D/g,"").length<10?"Use o DDD, ex.: (41) 98788-4888":"")&&ok;
+    ok=erro(p,(+p.value<1||+p.value>80)?"Entre 1 e 80 pessoas":"")&&ok;
+    const dd=d.value?new Date(d.value+"T12:00:00").getDay():null;
+    ok=erro(d,!d.value?"Escolha a data":(dd===0?"Domingo é fechado":""))&&ok;
+    ok=erro(hora,!hora.value?"Escolha o horário":"")&&ok;
+    if(!ok){toast("Confira os campos destacados");return}
+    zap("Olá, Biriba's! Gostaria de reservar uma mesa.\nNome: "+n.value.trim()+"\nWhatsApp: "+t.value+"\nPessoas: "+p.value+"\nData: "+d.value.split("-").reverse().join("/")+" às "+hora.value+($("#rObs").value.trim()?"\nObs.: "+$("#rObs").value.trim():""))});
+  $("#fGrupo").addEventListener("submit",e=>{e.preventDefault();
+    const n=$("#gNome"),p=$("#gPessoas"),d=$("#gData");let ok=true;
+    ok=erro(n,n.value.trim().length<2?"Informe o nome ou a empresa":"")&&ok;
+    ok=erro(p,(+p.value<5)?"A partir de 5 pessoas":"")&&ok;
+    ok=erro(d,!d.value?"Escolha a data prevista":"")&&ok;
+    if(!ok){toast("Confira os campos destacados");return}
+    zap("Olá, Biriba's! Gostaria de um orçamento para grupo.\nNome/empresa: "+n.value.trim()+"\nTipo: "+$("#gTipo").value+"\nPessoas: "+p.value+"\nData prevista: "+d.value.split("-").reverse().join("/"))});
+
+  /* rota, compartilhar, contato */
+  $("#rota").addEventListener("click",e=>{if(!navigator.geolocation)return;e.preventDefault();
+    navigator.geolocation.getCurrentPosition(p=>window.open("https://www.google.com/maps/dir/?api=1&origin="+p.coords.latitude+","+p.coords.longitude+"&destination=Biriba%27s+Restaurante+Campo+do+Tenente+PR","_blank","noopener"),
+      ()=>window.open(e.currentTarget.href,"_blank","noopener"),{timeout:6000})});
+  $("#compartilhar").onclick=async()=>{const d={title:"Biriba's Restaurante",text:"Almoço com carne na roda de fogo em Campo do Tenente",url:location.href};
+    if(navigator.share){try{await navigator.share(d)}catch(e){}}else{try{await navigator.clipboard.writeText(location.href);toast("Link copiado")}catch(e){toast(location.href)}}};
+  $("#contato").onclick=()=>{const v="BEGIN:VCARD\nVERSION:3.0\nFN:Biriba's Restaurante\nTEL;TYPE=CELL:+5541987884888\nADR;TYPE=WORK:;;Av. Miguel Komarchewski, 2350;Campo do Tenente;PR;83870-000;Brasil\nURL:https://www.instagram.com/biribas.restaurante/\nEND:VCARD";
+    const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([v],{type:"text/vcard"}));a.download="biribas-restaurante.vcf";a.click();toast("Contato salvo")};
+
+  /* navegação acompanha a seção */
+  const links=$$(".nav a"), secs=links.map(a=>$(a.getAttribute("href")));
+  new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){links.forEach(a=>a.classList.toggle("ativo",a.getAttribute("href")==="#"+en.target.id))}}),{rootMargin:"-45% 0px -50% 0px"}).observe&&secs.forEach(s=>s&&new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting)links.forEach(a=>a.classList.toggle("ativo",a.getAttribute("href")==="#"+en.target.id))}),{rootMargin:"-45% 0px -50% 0px"}).observe(s));
 })();
 </script>
 </body>
